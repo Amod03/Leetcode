@@ -34,3 +34,6 @@ public:
         return ans;
     }
 };
+
+//T.C.->(N-n*l)(2*n*l)==>(N-n*l)(n*l)
+//S.C->(n*l)
