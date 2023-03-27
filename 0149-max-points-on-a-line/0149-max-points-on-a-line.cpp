@@ -57,3 +57,7 @@ public:
         return ans;
     }
 };
+
+
+//t.c->n2 log(max)
+//s.c->n2 log(max)
