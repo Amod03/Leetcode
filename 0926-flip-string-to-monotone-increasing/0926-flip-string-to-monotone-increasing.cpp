@@ -23,10 +23,6 @@ public:
                 suf.push_back(suf[n-i-1]);
         }
         reverse(suf.begin(), suf.end());
-        for(int i=0;i<=n;i++)
-        {
-          cout<<suf[i]<<endl;
-        }
         int ans = INT_MAX;
         for(int i=1;i<=n;i++)
         {
