@@ -25,17 +25,19 @@ public:
                     else if(two_sum>target_2)
                         back--;
                     else{
-                        vector<int>quad(4,0);
-                        quad[0]=num[i];
-                        quad[1]=num[j];
-                        quad[2]=num[front];
-                        quad[3]=num[back];
+                        vector<int>quad;
+                        quad.push_back(num[i]);
+                        quad.push_back(num[j]);
+                        quad.push_back(num[front]);
+                        quad.push_back(num[back]);
                         res.push_back(quad);
                         
-                        while(front<back && num[front]==quad[2])
-                            front++;
-                        while(front<back && num[back]==quad[3])
+                        while(front<back && num[front]==num[front+1])
+                            ++front;
+                        while(front<back && num[back]==num[back-1])
                         --back;
+                        front++;
+                        back--;
                     }
                 }
                 while(j+1<n && num[j+1]==num[j])
