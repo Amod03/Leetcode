@@ -12,9 +12,9 @@ public:
         {
             if(mp.find(nums[i]-1)!=mp.end())
                 continue;
-            if(visited.find(nums[i])!=visited.end())
-                continue;
-            visited[nums[i]]=1;
+            //if(visited.find(nums[i])!=visited.end())
+              //  continue;
+            //visited[nums[i]]=1;
             int len=0;
             int x=nums[i];
             while(mp.find(x)!=mp.end())
