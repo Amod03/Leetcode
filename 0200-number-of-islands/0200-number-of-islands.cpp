@@ -1,5 +1,7 @@
 class Solution {
     private:
+     vector<int> x = {+1, -1, 0, 0};
+    vector<int> y = {0, 0, +1, -1};        
     void bfs(int row,int col,vector<vector<int>>& vis,vector<vector<char>> grid)
     {
         vis[row][col]=1;
@@ -14,15 +16,10 @@ class Solution {
             int col=q.front().second;
             q.pop();
             
-            //traverse all the 8 neighbours easily
-            for(int delrow=-1;delrow<=1;delrow++)
-            {
-                for(int delcol=-1;delcol<=1;delcol++)
-                {
-                    if(delrow==0 || delcol==0)
-                    {
-                 int nrow=row+delrow;
-                 int ncol=col+delcol;
+            //traverse all the 4 neighbours easily
+            for(int k=0; k<4; k++){
+                int nrow = row+x[k];
+                int ncol = col+y[k];
                     if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && grid[nrow][ncol]=='1' && !vis[nrow][ncol])
                     {
                         vis[nrow][ncol]=1;
@@ -30,9 +27,9 @@ class Solution {
                     }
                     }
                 }
-            }
+            
         }
-    }
+    
 public:
     int numIslands(vector<vector<char>>& grid) {
         int n=grid.size();
