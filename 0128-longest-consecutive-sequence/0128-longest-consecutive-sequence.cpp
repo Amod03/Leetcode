@@ -1,7 +1,7 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        unordered_map<int,int>mp,visited;
+        unordered_map<int,int>mp;
         int size=nums.size();
         for(int i=0;i<size;i++)
         {
