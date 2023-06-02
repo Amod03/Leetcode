@@ -8,7 +8,7 @@ public:
         
         for(int i=n-2;i>=0;i--)
         {
-            for(int j=i;j>=0;j--)
+            for(int j=0;j<=i;j++)
             {
                 int d=triangle[i][j]+front[j];
                 int dg=triangle[i][j]+front[j+1];
