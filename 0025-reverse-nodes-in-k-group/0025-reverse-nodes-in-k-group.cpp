@@ -9,28 +9,40 @@
  * };
  */
 class Solution {
+    int lengthOfLinkedList(ListNode* head) {
+    int length = 0;
+    while(head != NULL) {
+        ++length;
+        head = head->next;
+    }
+    return length;
+}
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-
-    ListNode* curr = head;
-    int count = 0;
-    while (curr != NULL && count != k) { // find the k+1 node
-        curr = curr->next;
-        count++;
-    }
-    if (count == k) { // if k+1 node is found
-        curr = reverseKGroup(curr, k); // reverse list with k+1 node as head
-        // head - head-pointer to direct part, 
-        // curr - head-pointer to reversed part;
-        while (count-- > 0) { // reverse current k-group: 
-            ListNode* tmp = head->next; // tmp - next head in direct part
-            head->next = curr; // preappending "direct" head to the reversed list 
-            curr = head; // move head of reversed part to a new node
-            head = tmp; // move "direct" head to the next node in direct part
+if(head == NULL||head->next == NULL) return head;
+    
+    int length = lengthOfLinkedList(head);
+    
+    ListNode* dummyHead = new ListNode(0);
+    dummyHead->next = head;
+    
+    ListNode* pre = dummyHead;
+    ListNode* cur;
+    ListNode* nex;
+    
+    while(length >= k) {
+        cur = pre->next;
+        nex = cur->next;
+        for(int i=1;i<k;i++) {
+            cur->next = nex->next;
+            nex->next = pre->next;
+            pre->next = nex;
+            nex = cur->next;
         }
-        head = curr;
+        pre = cur;
+        length -= k;
     }
-    return head;
+    return dummyHead->next;
     }
 
 };
