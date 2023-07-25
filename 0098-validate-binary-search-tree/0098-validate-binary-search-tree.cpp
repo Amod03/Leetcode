@@ -21,6 +21,6 @@ bool isValid(TreeNode* root,long high,long low)
 	return isValid(root->left,root->val,low) && isValid(root->right, high, root->val);
 }
 bool isValidBST(TreeNode *root) {
-	return isValid(root,LLONG_MAX,LLONG_MIN);
+	return isValid(root,LONG_MAX,LONG_MIN);
 }
 };
