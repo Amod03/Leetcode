@@ -8,11 +8,7 @@ public:
         for(int i=0;i<nums.size();i++)
         {
             psum=psum+nums[i];
-            
-            if(m.find(psum-k)!=m.end())
-            {
                 count=count+m[psum-k];
-            }
                 m[psum]++;
         }
         return count;
