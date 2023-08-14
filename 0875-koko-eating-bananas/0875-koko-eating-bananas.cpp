@@ -21,12 +21,11 @@ public:
          int mid=(low+high)/2;
          if(check(piles,h,piles.size(),mid))
          {
-             ans=mid;
              high=mid-1;
          }
          else
            low=mid+1;
         }
-        return ans;
+        return low;
     }
 };
