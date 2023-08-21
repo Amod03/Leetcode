@@ -1,22 +1,50 @@
 class Solution {
-  int largestRectangleArea(vector<int>& heights) {
-        stack<int>st;
-        int maxA=0;
-        int n=heights.size();
-        for(int i=0;i<=n;i++)
-        {
-            while(!st.empty() && (i==n || heights[st.top()]>=heights[i]))
+    vector<int> nextsmall(vector<int>& arr,int n){
+         stack<int> s;
+        vector<int> ans(n,-1);
+        for(int i=arr.size()-1;i>=0;i--){
+           int curr=arr[i];
+            while(!s.empty() && arr[s.top()]>=curr)
             {
-                int height=heights[st.top()];
-                st.pop();
-                int width;
-                if(st.empty()) width=i;
-                else width=i-st.top()-1;
-                maxA=max(maxA,width*height);
+            s.pop();
             }
-            st.push(i);
+            if(!s.empty())
+            ans[i]=s.top();
+            s.push(i);
         }
-      return maxA;
+        return ans;
+    }
+    vector<int> prevsmall(vector<int>& arr,int n){
+         stack<int> s;
+        vector<int> ans(n,-1);
+        for(int i=0;i<n;i++){
+           int curr=arr[i];
+            while(!s.empty() && arr[s.top()]>=curr)
+            {
+            s.pop();
+            }
+            if(!s.empty())
+            ans[i]=s.top();
+            s.push(i);
+        }
+        return ans;
+    }
+    int largestRectangleArea(vector<int>& heights) {
+        int area=0;
+        int n =heights.size();
+        vector<int> next(n);
+        vector<int> prev(n);
+        next=nextsmall(heights,n);
+        prev=prevsmall(heights,n);
+        for(int i=0;i<n;i++){
+            int l=heights[i];
+            if(next[i]==-1)
+            next[i]=n;
+             int b=next[i]-prev[i]-1;
+             int newarea=l*b;
+             area=max(newarea,area);
+        }
+        return area;
     }
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
