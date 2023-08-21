@@ -11,9 +11,8 @@ public:
         string res = "";// result string
         stack <char> s; // char stack
         
-        s.push(num[0]); // pushing first character into stack
         
-        for(int i = 1; i<num.length(); ++i)
+        for(int i = 0; i<num.length(); ++i)
         {
             while(k > 0 && !s.empty() && num[i] < s.top())
             {
