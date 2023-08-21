@@ -10,16 +10,15 @@ using namespace std;
 class Solution{
 public:
     vector<int> leftSmaller(int n, int nums[]){
-vector < int > nge(n, -1);
+      vector < int > nge(n, -1);
       stack < int > st;
       for (int i = 0; i<n; i++) {
         while (!st.empty() && st.top() >= nums[i]) {
           st.pop();
         }
 
-        if (i < n) {
           if (!st.empty()) nge[i] = st.top();
-        }
+
         st.push(nums[i]);
       }
       return nge;
