@@ -1,45 +1,17 @@
 class Solution {
 public:
-    int sumSubarrayMins(vector<int>& arr) {
+    int sumSubarrayMins(vector<int>& A) {
         int MOD=1e9+7;
-         int n = arr.size();
-        
-        vector<int> left(n,-1), right(n,n);
-        // for every i find the Next smaller element to left and right
-        
-        // Left
-        stack<int> st;
-        for(int i=0; i<n; i++)
-        {
-            while(st.size() && arr[i] < arr[st.top()]) st.pop();
-            if(st.size()) left[i] = i - st.top();
-            else left[i] = i+1;
-            st.push(i);
+         long res = 0, n = A.size(), j, k;
+        stack<int> s;
+        for (int i = 0; i <= n; ++i) {
+            while (!s.empty() && A[s.top()] > (i == n ? -2e9 : A[i])) {
+                j = s.top(), s.pop();
+                k = s.empty() ? -1 : s.top();
+                res += (long)A[j] * (i - j) * (j - k);
+            }
+            s.push(i);
         }
-        
-        while(st.size()) st.pop();
-        
-        // Right
-        for(int i=n-1; i>=0; i--)
-        {
-            while(st.size() && arr[i] <= arr[st.top()]) st.pop();
-            if(st.size()) right[i] = st.top() - i;
-            else right[i] = n - i;
-            st.push(i);
-        }
-        
-         for(int i=0; i<n; i++) cout << left[i] << " : " << right[i] << endl;
-        
-        // for each i, contribution is (Left * Right) * Element 
-        
-        int res = 0;
-        for(int i=0; i<n; i++)
-        {
-            long long prod = (left[i]*right[i])%MOD;
-            prod = (prod*arr[i])%MOD;
-            res = (res + prod)%MOD;
-        }
-        
         return res%MOD;
     }
 };
