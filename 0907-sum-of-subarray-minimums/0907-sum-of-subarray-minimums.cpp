@@ -8,7 +8,7 @@ public:
             while (!s.empty() && A[s.top()] > (i == n ? -2e9 : A[i])) {
                 j = s.top(), s.pop();
                 k = s.empty() ? -1 : s.top();
-                res += (A[j] * ((i - j) * (j - k))%MOD)%MOD;
+                res += A[j] * (i - j) * (j - k);
             }
             s.push(i);
         }
