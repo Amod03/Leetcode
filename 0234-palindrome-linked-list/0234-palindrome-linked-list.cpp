@@ -13,8 +13,8 @@ private:
 ListNode* getMiddle(ListNode* head)
 {
     ListNode* slow=head;
-    ListNode* fast=head->next;
-    while(fast!=NULL && fast->next!=NULL)
+    ListNode* fast=head;
+    while(fast->next!=NULL && fast->next->next!=NULL)
     {
         fast=fast->next->next;
         slow=slow->next;
