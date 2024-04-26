@@ -17,11 +17,9 @@ class Solution {
         return NULL;
         ListNode* slow=head;
         ListNode* fast=head;
-        while(slow!=NULL && fast!=NULL)
+        while(fast && fast->next!=NULL)
         {
-            fast=fast->next;
-            if(fast!=NULL)
-            fast=fast->next;
+            fast=fast->next->next;
             slow=slow->next;
             if(slow==fast)
             {
