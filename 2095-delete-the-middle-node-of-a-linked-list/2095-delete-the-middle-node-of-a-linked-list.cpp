@@ -20,8 +20,10 @@ public:
         fast=fast->next->next;
         slow=slow->next;
     }
-    slow->next=slow->next->next;
         
+    ListNode* middle=slow->next;
+    slow->next=slow->next->next;
+    delete(middle);
     return head;
     }
 };
