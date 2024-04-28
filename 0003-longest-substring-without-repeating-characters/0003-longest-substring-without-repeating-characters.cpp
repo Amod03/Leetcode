@@ -10,10 +10,7 @@ public:
         while(right<n)
         {
             if(mpp[s[right]]!=-1){
-                cout<<left;
-                cout<<mpp[s[right]]+1;
                 left=max(mpp[s[right]]+1,left);
-                cout<<left<<endl;
             }
             
             mpp[s[right]]=right;
