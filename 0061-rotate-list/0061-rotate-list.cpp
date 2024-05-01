@@ -11,41 +11,23 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        int count=0;
-        ListNode* temp=head;
-        ListNode* temp2=head;
+      if(head == NULL||head->next == NULL||k == 0) return head;
+    //calculating length
+    ListNode* temp = head;
+    int length = 1;
+    while(temp->next != NULL) {
+        ++length;
+        temp = temp->next;
+    }
+    //link last node to first node
+    temp->next = head;
+    k = k%length; //when k is more than length of list
+    int end = length-k; //to get end of the list
+    while(end--) temp = temp->next;
+    //breaking last node link and pointing to NULL
+    head = temp->next;
+    temp->next = NULL;
         
-        while(temp!=NULL)
-        {
-            count++;
-            temp=temp->next;
-        }
-        if(count==0)
-        return head;
-        int rotate=k%count;
-        if(rotate==0)
-        return head;
-        else{
-            temp=head;
-            //cout<<temp->val<<endl;
-            while(temp->next!=NULL)
-            {
-                temp=temp->next;
-            }
-            temp->next=temp2;
-           // cout<<temp->next->val<<endl;
-            temp=head;
-            int move=count-rotate;
-            while(move-1>0)
-            {
-              temp=temp->next;
-              move--;
-            }
-            //cout<<temp->val<<endl;
-            temp2=temp->next;
-            temp->next=NULL;
-            //cout<<temp2->next->next<<endl;
-        }
-        return temp2;
+    return head;
     }
 };
