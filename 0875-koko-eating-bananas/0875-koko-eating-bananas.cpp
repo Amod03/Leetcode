@@ -9,7 +9,7 @@ public:
           if(count>h)
           return false;
         }
-        return (count<=h);
+        return true;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
         int maxi=*max_element(piles.begin(),piles.end());
