@@ -14,7 +14,6 @@ public:
          }
          if(!st.empty())
          { 
-             if(i<n)
              mp[nums2[i]]=st.top();
          }
               st.push(nums2[i]);
