@@ -23,7 +23,7 @@ public:
         // Any time they collide or reach end together without colliding 
         // then return any one of the pointers.
         //
-        if (p1 == p2) return p1;
+        if (p1 == p2) break;
 
         //
         // If one of them reaches the end earlier then reuse it 
