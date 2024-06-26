@@ -20,7 +20,7 @@ public:
         while(first->next && second->next)
         {
             first->next=second->next;
-            second->next=first->next->next;
+            second->next=second->next->next;
             first=first->next;
             second=second->next;
         }
