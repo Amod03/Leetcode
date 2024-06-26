@@ -25,15 +25,13 @@ ListNode* getMiddle(ListNode* head)
 private:
 ListNode* reverse(ListNode* head)
 {
-    ListNode* curr=head;
+    ListNode* temp=head;
     ListNode* prev=NULL;
-    ListNode* next=NULL;
-    while(curr!=NULL)
-    {
-        next=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=next;
+    while(temp){
+        ListNode* front=temp->next;
+        temp->next=prev;
+        prev=temp;
+        temp=front;
     }
     return prev;
     
