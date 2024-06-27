@@ -11,31 +11,22 @@
  */
  #include<bits/stdc++.h>
 class Solution {
-private:
-pair<bool,int>isBalanced3(TreeNode* root)
-{
-    if(root==NULL){
-    pair<bool,int>p=make_pair(true,0);
-    return p;
-    }
-pair<bool,int>left=isBalanced3(root->left);
-pair<bool,int>right=isBalanced3(root->right);
-bool leftAns=left.first;
-bool rightAns=right.first;
-bool diff=abs(left.second-right.second)<=1;
-pair<bool,int>ans;
-ans.second=max(left.second,right.second)+1;
-
-if(leftAns && rightAns && diff)
-ans.first=true;
-else
-ans.first=false;
-
-return ans;
-}
 
 public:
+       int dfsHeight(TreeNode* root) {
+        if (root == NULL) return 0;
+        int leftHeight = dfsHeight(root->left);
+        if (leftHeight == -1) 
+            return -1;
+        int rightHeight = dfsHeight(root->right);
+        if (rightHeight == -1) 
+            return -1;
+        if (abs(leftHeight - rightHeight) > 1)  
+            return -1;
+        return max(leftHeight, rightHeight) + 1;
+    }
     bool isBalanced(TreeNode* root) {
-        return isBalanced3(root).first;
+              return dfsHeight(root) != -1;
+
     }
 };
