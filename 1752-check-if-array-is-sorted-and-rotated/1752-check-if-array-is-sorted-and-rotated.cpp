@@ -8,7 +8,6 @@ public:
             if(nums[i]>nums[i+1])
                 pivot=i+1;
         }
-        cout<<pivot;
         for(int i=0;i<n-1;i++)
         {
             if(nums[(pivot+i)%n]>nums[(pivot+i+1)%n])
