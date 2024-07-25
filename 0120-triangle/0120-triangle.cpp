@@ -1,21 +1,16 @@
 class Solution {
 public:
+    int solve(int n,int m,int l,vector<vector<int>>& triangle,vector<vector<int>>& dp){
+      if(n == l-1) return triangle[n][m];
+        if(dp[n][m]!=-1)
+            return dp[n][m];
+        int left=triangle[n][m]+solve(n+1,m+1,l,triangle,dp);
+            int right=triangle[n][m]+solve(n+1,m,l,triangle,dp);
+        return dp[n][m]=min(left,right);
+    }
     int minimumTotal(vector<vector<int>>& triangle) {
         int n=triangle.size();
-        vector<int>front(n,0),cur(n,0);
-        for(int j=0;j<n;j++)
-            front[j]=triangle[n-1][j];
-        
-        for(int i=n-2;i>=0;i--)
-        {
-            for(int j=0;j<=i;j++)
-            {
-                int d=triangle[i][j]+front[j];
-                int dg=triangle[i][j]+front[j+1];
-                cur[j]=min(d,dg);
-            }
-            front=cur;
-        }
-        return front[0];
+        vector<vector<int>>dp(n,vector<int>(n,-1));
+        return solve(0,0,n,triangle,dp);
     }
 };
