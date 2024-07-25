@@ -13,7 +13,6 @@ public:
     }
     int rob(vector<int>& arr) {
         int n=arr.size();
-        vector<int>dp(n,-1);
         int prev=arr[0];
         int prev1=0;
         for(int i=1;i<n;i++){
