@@ -14,14 +14,17 @@ public:
     int rob(vector<int>& arr) {
         int n=arr.size();
         vector<int>dp(n,-1);
-        dp[0]=arr[0];
+        int prev=arr[0];
+        int prev1=0;
         for(int i=1;i<n;i++){
             int pick=arr[i];
             if(i>1)
-            pick=pick+dp[i-2];
-         int nonpick=dp[i-1];  
-         dp[i]=max(pick,nonpick);
+            pick=pick+prev1;
+         int nonpick=prev;  
+         int cur=max(pick,nonpick);
+            prev1=prev;
+            prev=cur;
         }
-        return dp[n-1];
+        return prev;
     }
 };
