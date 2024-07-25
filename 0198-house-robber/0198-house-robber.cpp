@@ -1,20 +1,27 @@
 class Solution {
 public:
-    int solve(vector<int>&arr,int sum,int n,vector<int>&dp){
+    int solve(vector<int>&arr,int n,vector<int>&dp){
         if(n==0)
             return arr[0];
         if(n<0)
             return 0;
         if(dp[n]!=-1)return dp[n];
         int pick=INT_MIN;
-            pick=sum+arr[n]+solve(arr,sum,n-2,dp);
-        int nonpick=sum+solve(arr,sum,n-1,dp);
+            pick=arr[n]+solve(arr,n-2,dp);
+        int nonpick=solve(arr,n-1,dp);
         return dp[n]=max(pick,nonpick);
     }
     int rob(vector<int>& arr) {
-       int sum=0;
         int n=arr.size();
         vector<int>dp(n,-1);
-        return solve(arr,sum,n-1,dp);
+        dp[0]=arr[0];
+        for(int i=1;i<n;i++){
+            int pick=arr[i];
+            if(i>1)
+            pick=pick+dp[i-2];
+         int nonpick=dp[i-1];  
+         dp[i]=max(pick,nonpick);
+        }
+        return dp[n-1];
     }
 };
