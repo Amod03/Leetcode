@@ -1,33 +1,25 @@
 class Solution {
 public:
+    int solve(int n,int target,vector<int>&coins,int mini,vector<vector<int>>&dp){
+        if(n==0){
+            if(target % coins[0] == 0)
+            return target / coins[0]; 
+        else
+            return 1e9; 
+        }
+        if(dp[n][target]!=-1)return dp[n][target];
+        int take=1e9;
+        if(coins[n]<=target)
+        take=1+solve(n,target-coins[n],coins,mini,dp);
+        int notTake=solve(n-1,target,coins,mini,dp);
+        return dp[n][target]=min(take,notTake);
+    }
     int coinChange(vector<int>& coins, int target) {
-        int n=coins.size();
-        vector<int>prev(target+1,0),cur(target+1,0);
-        
-        for(int t=0;t<=target;t++)
-        {
-            if(t%coins[0]==0)
-                prev[t]=t/coins[0];
-            else
-                prev[t]=1e9;
-        }
-        for(int ind=1;ind<n;ind++)
-        {
-            for(int t=0;t<=target;t++)
-            {
-                int nottake=0+prev[t];
-                int take=INT_MAX;
-                if(coins[ind]<=t)
-                {
-                    take=1+cur[t-coins[ind]];
-                }
-                cur[t]=min(take,nottake);
-            }
-            prev=cur;
-        }
-        int ans=prev[target];
-        if(ans>=1e9)
-            return -1;
-        return ans;
+        int mini=INT_MAX;
+        vector<vector<int>>dp(coins.size(),vector<int>(target+1,-1));
+        int ans=solve(coins.size()-1,target,coins,mini,dp);
+         if(ans >= 1e9)
+        return -1;
+    return ans;
     }
 };
