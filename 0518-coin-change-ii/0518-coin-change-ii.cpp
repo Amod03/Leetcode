@@ -18,7 +18,22 @@ public:
     
     int change(int target, vector<int>& coins) {
         int n=coins.size();
-        vector<vector<int>>dp(coins.size(),vector<int>(target+1,-1));
-        return solve(n-1,target,coins,dp);
+        vector<vector<int>>dp(coins.size(),vector<int>(target+1,0));
+        for(int i=0;i<=target;i++){
+         if(i%coins[0]==0){
+             dp[0][i]=1;
+         }
         }
+        
+        for(int i=1;i<n;i++){
+         for(int j=0;j<=target;j++){
+            int take=0;
+        if(coins[i]<=j)
+        take=dp[i][j-coins[i]];
+        int notTake=dp[i-1][j];
+             dp[i][j]=take+notTake;
+         }
+        }
+      return dp[n-1][target];
+    }
 };
