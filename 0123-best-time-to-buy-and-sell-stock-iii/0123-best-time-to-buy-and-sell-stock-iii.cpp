@@ -15,7 +15,15 @@ public:
     
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
-        vector<vector<int>>dp(n,vector<int>(4,-1));
-        return solve(0,0,prices,dp);
+        vector<vector<int>>dp(n+1,vector<int>(5,0));
+        for(int i=n-1;i>=0;i--){
+            for(int transaction=0;transaction<4;transaction++){
+            if(transaction%2==0)
+        dp[i][transaction]=max(dp[i+1][transaction+1]-prices[i],dp[i+1][transaction]);
+        else
+        dp[i][transaction]=max(dp[i+1][transaction+1]+prices[i],dp[i+1][transaction]);
+            }
+        }
+        return dp[0][0];
     }
 };
