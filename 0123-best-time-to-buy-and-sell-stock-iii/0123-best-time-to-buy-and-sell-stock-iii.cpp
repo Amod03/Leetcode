@@ -1,36 +1,21 @@
 class Solution {
 public:
-    int solve(int buy,int n,int cap,vector<int>& prices, vector<vector<vector<int>>>&dp){
-        if(n==prices.size()){
+    int solve(int n,int transaction,vector<int>& prices, vector<vector<int>>&dp){
+        if(n==prices.size() || transaction==4){
             return 0;
         }
-        if(cap==0)
-            return 0;
         int profit=0;
-        if(dp[n][buy][cap]!=-1)return dp[n][buy][cap];
-        if(buy)
-        profit=max(solve(0,n+1,cap,prices,dp)-prices[n],solve(1,n+1,cap,prices,dp));
+        if(dp[n][transaction]!=-1) return dp[n][transaction];
+        if(transaction%2==0)
+        profit=max(solve(n+1,transaction+1,prices,dp)-prices[n],solve(n+1,transaction,prices,dp));
         else
-        profit=max(solve(1,n+1,cap-1,prices,dp)+prices[n],solve(0,n+1,cap,prices,dp));
-        return dp[n][buy][cap]=profit;
+        profit=max(solve(n+1,transaction+1,prices,dp)+prices[n],solve(n+1,transaction,prices,dp));
+        return dp[n][transaction]=profit;
     }
     
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
-        vector<vector<int>>prev(2,vector<int>(3,0));
-        vector<vector<int>>cur(2,vector<int>(3,0));
-        int profit=0;
-        for(int i=n-1;i>=0;i--){
-            for(int j=0;j<2;j++){
-                for(int cap=1;cap<3;cap++){
-        if(j)
-        prev[j][cap]=max(cur[0][cap]-prices[i],cur[1][cap]);
-        else
-        prev[j][cap]=max(cur[1][cap-1]+prices[i],cur[0][cap]);
-                }
-                cur=prev;
-            }
-        }
-        return cur[1][2];
+        vector<vector<int>>dp(n,vector<int>(4,-1));
+        return solve(0,0,prices,dp);
     }
 };
