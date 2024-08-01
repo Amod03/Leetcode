@@ -2,7 +2,7 @@ class Solution {
 public:
     
     int solve(int iR,int jC,int m,int n,int move,int a[],int b[],vector<vector<vector<int>>>&dp){
-        if(iR < 0 || iR >=m || jC<0 || jC>=n){
+        if(iR == 0 || iR ==m || jC==0 || jC==n){
                   return 1;
          }
         if(move==0)
@@ -20,7 +20,7 @@ public:
     int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
         int a[]={-1,0,1,0};
         int b[]={0,1,0,-1};
-        vector<vector<vector<int>>>dp(m+1,vector<vector<int>>(n+1,vector<int>(maxMove+1,-1)));
-        return solve(startRow,startColumn,m,n,maxMove,a,b,dp);
+        vector<vector<vector<int>>>dp(m+2,vector<vector<int>>(n+2,vector<int>(maxMove+1,-1)));
+        return solve(startRow+1,startColumn+1,m+1,n+1,maxMove,a,b,dp);
     }
 };
