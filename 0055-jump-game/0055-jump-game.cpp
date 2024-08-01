@@ -17,16 +17,26 @@ public:
         return dp[i]=false;
     }
     bool canJump(vector<int>& nums) {
-        int n=nums.size();
-        vector<int>dp(n,0);
-        dp[n-1]=1;
-        for(int i=n-1;i>=0;i--){
-           for(int j=1;j<=nums[i];j++){
-             if(i+j<nums.size())
-             if(dp[i+j])
-               dp[i]=1;
+        // int n=nums.size();
+        // vector<int>dp(n,0);
+        // dp[n-1]=1;
+        // for(int i=n-1;i>=0;i--){
+        //    for(int j=1;j<=nums[i];j++){
+        //      if(i+j<nums.size())
+        //      if(dp[i+j])
+        //        dp[i]=1;
+        // }
+        // }
+        // return dp[0];
+        
+        //it shows at max what index can I reach.
+        //initially I can only reach index 0, hence reach = 0
+        int reach = 0; 
+    
+        for(int idx = 0; idx < nums.size(); idx++) {
+            if(reach < idx) return false;
+            reach = max(reach, idx + nums[idx]);
         }
-        }
-        return dp[0];
+        return true;
     }
 };
