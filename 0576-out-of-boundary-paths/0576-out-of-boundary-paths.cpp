@@ -20,7 +20,43 @@ public:
     int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
         int a[]={-1,0,1,0};
         int b[]={0,1,0,-1};
-        vector<vector<vector<int>>>dp(m+2,vector<vector<int>>(n+2,vector<int>(maxMove+1,-1)));
-        return solve(startRow+1,startColumn+1,m+1,n+1,maxMove,a,b,dp);
+        vector<vector<vector<int>>>dp(m+2,vector<vector<int>>(n+2,vector<int>(maxMove+1,0)));
+         const int MOD = 1000000007;
+
+        for(int i=0;i<n+2;i++){
+            for(int j=0;j<=maxMove;j++){
+                dp[0][i][j]=1;
+            }
+        }
+        for(int i=0;i<m+2;i++){
+            for(int j=0;j<=maxMove;j++){
+                dp[i][0][j]=1;
+            }
+        }
+        for(int i=0;i<n+2;i++){
+            for(int j=0;j<=maxMove;j++){
+                dp[m+1][i][j]=1;
+            }
+        }
+        for(int i=0;i<m+2;i++){
+            for(int j=0;j<=maxMove;j++){
+                dp[i][n+1][j]=1;
+            }
+        }
+        
+        int ways=0;
+        for (int move = 1; move <= maxMove; ++move) {
+            for (int i = 1; i <= m; ++i) {
+                for (int j = 1; j <= n; ++j) {
+                    for (int k = 0; k < 4; ++k) {
+                        int newR = i + a[k];
+                        int newC = j + b[k];
+                        dp[i][j][move] = (dp[i][j][move] + dp[newR][newC][move - 1]) % MOD;
+                    }
+                }
+            }
+        }
+
+        return dp[startRow+1][startColumn+1][maxMove];
     }
 };
