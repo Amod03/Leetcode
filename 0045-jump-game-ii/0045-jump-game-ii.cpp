@@ -18,16 +18,17 @@ public:
     
     int jump(vector<int>& nums) {
         int n=nums.size();
-        vector<int>dp(n,0);
-        
-        for(int i=n-2;i>=0;i--){
-            int mini=1e9;
-            for(int j=1;j<=nums[i];j++){
-                if(i+j<nums.size())
-                mini=min(mini,1+dp[i+j]);      
-           }
-          dp[i]=mini;
+        int l,r,jump;
+        l=r=jump=0;
+        while(r<n-1){
+          int farthest=0;
+          for(int i=l;i<=r;i++){
+              farthest=max(farthest,i+nums[i]);
+          }
+            l=r+1;
+            r=farthest;
+            jump++;
         }
-        return dp[0];
+        return jump;
     }
 };
