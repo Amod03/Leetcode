@@ -34,7 +34,7 @@ public:
         int reach = 0; 
     
         for(int idx = 0; idx < nums.size(); idx++) {
-            if(reach < idx) return false;
+            if(idx > reach) return false;
             reach = max(reach, idx + nums[idx]);
         }
         return true;
