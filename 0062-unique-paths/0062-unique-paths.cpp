@@ -9,20 +9,16 @@ public:
         return dp[n][m]=top+left;
     }
     int uniquePaths(int n, int m) {
-        vector<vector<int>>dp(n,vector<int>(m,-1));
-        for(int i=0;i<n;i++){
-            dp[i][0]=1;
-        }
-            for(int j=0;j<m;j++){
-                dp[0][j] = 1;
-            }
+        vector<int>prev(m,1),cur(m,0);
+        cur[0]=1;
         for(int i=1;i<n;i++){
             for(int j=1;j<m;j++){
-            int top=dp[i-1][j];
-            int left=dp[i][j-1];
-            dp[i][j]=top+left;
+            int top=prev[j];
+            int left=cur[j-1];
+            cur[j]=top+left;
             }
+            prev=cur;
         }
-     return dp[n-1][m-1];
+     return prev[m-1];
     }
 };
