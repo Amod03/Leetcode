@@ -10,20 +10,18 @@ public:
     }
     int minimumTotal(vector<vector<int>>& triangle) {
         int n=triangle.size();
-        vector<int>prev(n,-1);
+        vector<vector<int>>dp(n,vector<int>(n,-1));
        for (int j = 0; j < n; j++) {
-        prev[j] = triangle[n - 1][j];
+        dp[n - 1][j] = triangle[n - 1][j];
         }
         
         for(int i=n-2;i>=0;i--){
-            vector<int>cur(n,-1);
-           for(int j=i;j>=0;j--){
-            int down = triangle[i][j] + prev[j];
-            int diagonal = triangle[i][j] + prev[j + 1];
-            cur[j] = min(down, diagonal);
+           for(int j=0;j<=i;j++){
+            int down = triangle[i][j] + dp[i + 1][j];
+            int diagonal = triangle[i][j] + dp[i + 1][j + 1];
+            dp[i][j] = min(down, diagonal);
            }
-            prev=cur;
         }
-        return prev[0];
+        return dp[0][0];
     }
 };
