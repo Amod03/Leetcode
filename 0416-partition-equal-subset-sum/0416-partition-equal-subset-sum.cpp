@@ -13,23 +13,19 @@ public:
         int k = totSum/2;
      vector<bool>prev(k+1,false);
         int n=arr.size();
-         for (int i = 0; i < n; i++) {
-        prev[0] = true;
-    }
     if (arr[0] <= k) {
         prev[arr[0]] = true;
     }
     for (int ind = 1; ind < n; ind++) {
-             vector<bool>cur(k+1,false);
-        for (int target = 1; target <= k; target++) {
+        prev[0]=true;
+        for (int target = k; target >=1; target--) {
             bool notTaken = prev[target];
             bool taken = false;
             if (arr[ind] <= target) {
                 taken = prev[target - arr[ind]];
             }
-            cur[target] = notTaken || taken;
+            prev[target] = notTaken || taken;
         }
-        prev=cur;
     }
     
     return prev[k];
