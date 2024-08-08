@@ -27,11 +27,11 @@ public:
         for(int i=1;i<coins.size();i++){
             for(int j=0;j<=target;j++){
                 int take=1e9;
-                int notTake=prev[j];
             
                 if(coins[i]<=j)
-              take=1+prev[j-coins[i]];
-              
+                take=1+prev[j-coins[i]];
+                int notTake=prev[j];
+
                 prev[j]=min(take,notTake);
             }
         }
