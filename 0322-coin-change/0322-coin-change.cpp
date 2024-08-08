@@ -16,7 +16,7 @@ public:
     }
     int coinChange(vector<int>& coins, int target) {
         int mini=INT_MAX;
-        vector<int>prev(target+1,0),cur(target+1,0);
+        vector<int>prev(target+1,0);
         for(int i=0;i<=target;i++){
             if(i%coins[0]==0)
                 prev[i]=i/coins[0];
@@ -27,12 +27,13 @@ public:
         for(int i=1;i<coins.size();i++){
             for(int j=0;j<=target;j++){
                 int take=1e9;
-            if(coins[i]<=j)
-              take=1+cur[j-coins[i]];
-              int notTake=prev[j];
-                cur[j]=min(take,notTake);
+                int notTake=prev[j];
+            
+                if(coins[i]<=j)
+              take=1+prev[j-coins[i]];
+              
+                prev[j]=min(take,notTake);
             }
-            prev=cur;
         }
         int ans=prev[target];
          if(ans >= 1e9)
