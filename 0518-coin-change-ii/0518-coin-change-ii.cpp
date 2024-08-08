@@ -18,10 +18,10 @@ public:
     
     int change(int target, vector<int>& coins) {
         int n=coins.size();
-        vector<vector<int>>dp(coins.size(),vector<int>(target+1,0));
+        vector<int>prev(target+1,0);
         for(int i=0;i<=target;i++){
          if(i%coins[0]==0){
-             dp[0][i]=1;
+             prev[i]=1;
          }
         }
         
@@ -29,11 +29,11 @@ public:
          for(int j=0;j<=target;j++){
             int take=0;
         if(coins[i]<=j)
-        take=dp[i][j-coins[i]];
-        int notTake=dp[i-1][j];
-             dp[i][j]=take+notTake;
+        take=prev[j-coins[i]];
+        int notTake=prev[j];
+             prev[j]=take+notTake;
          }
         }
-      return dp[n-1][target];
+      return prev[target];
     }
 };
