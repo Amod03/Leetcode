@@ -13,24 +13,28 @@ public:
         return dp[n][m]=max(solve(n-1,m,text1,text2,dp),solve(n,m-1,text1,text2,dp));
     }
     int longestCommonSubsequence(string text1, string text2) {
-        int n=text1.size();
-        int m=text2.size();
-        vector<int>prev(m+1,0);
+        int n = text1.size();
+    int m = text2.size();
+    
+    // Create a 1D array to store the results of the previous row
+    vector<int> dp(m + 1, 0);
+    
+    for (int i = 1; i <= n; i++) {
+        int prev = 0; // This will store the dp[i-1][j-1] value
         
-        for(int i=1;i<=n;i++){
-            vector<int>cur(m+1,0);
-            for(int j=1;j<=m;j++){
-            if(text1[i-1]==text2[j-1]){
-              cur[j]= 1+prev[j-1];
-            }else{
-                    int first=prev[j];
-                    int second=cur[j-1];
-
-            cur[j]=max(first,second);
+        for (int j = 1; j <= m; j++) {
+            int temp = dp[j]; // Store the current dp[j] before updating
+            
+            if (text1[i - 1] == text2[j - 1]) {
+                dp[j] = prev + 1;
+            } else {
+                dp[j] = max(dp[j], dp[j - 1]);
             }
-            }
-            prev=cur;
+            
+            prev = temp; // Update prev to the value of dp[j] before modification
         }
-        return prev[m];
+    }
+    
+    return dp[m];
     }
 };
