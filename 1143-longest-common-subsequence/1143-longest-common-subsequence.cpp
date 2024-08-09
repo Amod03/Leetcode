@@ -12,24 +12,22 @@ public:
         
         return dp[n][m]=max(solve(n-1,m,text1,text2,dp),solve(n,m-1,text1,text2,dp));
     }
-    int longestCommonSubsequence(string text1, string text2) {
-        int n = text1.size();
-    int m = text2.size();
-    vector<int> prev(m + 1, 0);
-    
-    for (int i = 1; i <= n; i++) {
-        int prevDiag = 0;  // This will store dp[i-1][j-1]
-        for (int j = 1; j <= m; j++) {
-            int temp = prev[j];  // Store the current dp[j] before updating
-            if (text1[i - 1] == text2[j - 1]) {
-                prev[j] = prevDiag + 1;
-            } else {
-                prev[j] = max(prev[j], prev[j - 1]);
-            }
-            prevDiag = temp;  // Update prevDiag to the previous dp[j]
+    int longestCommonSubsequence(string s1, string s2) {
+        int n = s1.size();
+    int m = s2.size();
+
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0)); // Create a DP table
+
+    // Fill in the DP table to calculate the length of LCS
+    for (int ind1 = 1; ind1 <= n; ind1++) {
+        for (int ind2 = 1; ind2 <= m; ind2++) {
+            if (s1[ind1 - 1] == s2[ind2 - 1])
+                dp[ind1][ind2] = 1 + dp[ind1 - 1][ind2 - 1]; // Characters match, increment LCS length
+            else
+                dp[ind1][ind2] = max(dp[ind1 - 1][ind2], dp[ind1][ind2 - 1]); // Characters don't match, consider the maximum from left or above
         }
     }
-    
-    return prev[m];
+
+    return dp[n][m];
     }
 };
