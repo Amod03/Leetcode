@@ -15,26 +15,21 @@ public:
     int longestCommonSubsequence(string text1, string text2) {
         int n = text1.size();
     int m = text2.size();
-    
-    // Create a 1D array to store the results of the previous row
-    vector<int> dp(m + 1, 0);
+    vector<int> prev(m + 1, 0);
     
     for (int i = 1; i <= n; i++) {
-        int prev = 0; // This will store the dp[i-1][j-1] value
-        
+        int prevDiag = 0;  // This will store dp[i-1][j-1]
         for (int j = 1; j <= m; j++) {
-            int temp = dp[j]; // Store the current dp[j] before updating
-            
+            int temp = prev[j];  // Store the current dp[j] before updating
             if (text1[i - 1] == text2[j - 1]) {
-                dp[j] = prev + 1;
+                prev[j] = prevDiag + 1;
             } else {
-                dp[j] = max(dp[j], dp[j - 1]);
+                prev[j] = max(prev[j], prev[j - 1]);
             }
-            
-            prev = temp; // Update prev to the value of dp[j] before modification
+            prevDiag = temp;  // Update prevDiag to the previous dp[j]
         }
     }
     
-    return dp[m];
+    return prev[m];
     }
 };
