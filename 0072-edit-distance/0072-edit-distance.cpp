@@ -18,28 +18,26 @@ public:
 
     
     int minDistance(string text1, string text2) {
-        int n = text1.size();
-    int m = text2.size();
-    vector<int> dp(m + 1, 0);
-    
-    for (int j = 0; j <= m; j++) {
-        dp[j] = j;
-    }
-    
-    for (int i = 1; i <= n; i++) {
-        int prev = dp[0];
-        dp[0] = i;
-        for (int j = 1; j <= m; j++) {
-            int temp = dp[j];
-            if (text1[i - 1] == text2[j - 1]) {
-                dp[j] = prev;
-            } else {
-                dp[j] = 1 + min({prev, dp[j], dp[j - 1]});
-            }
-            prev = temp;
+        int n=text1.size();
+        int m=text2.size();
+    vector<int>prev(m+1, 0);
+        for(int i=0;i<=m;i++){
+            prev[i]=i;
         }
-    }
-    
-    return dp[m];
+        
+        
+        for(int i=1;i<=n;i++){
+            int diag=i-1;
+            prev[0]=i;
+            for(int j=1;j<=m;j++){
+                int temp=prev[j];
+         if (text1[i-1] == text2[j-1])
+        prev[j] = 0 + diag;
+        else
+        prev[j] = 1 + min(diag,min(prev[j],prev[j-1]));
+                diag=temp;
+            }
+        }
+     return prev[m];
     }
 };
