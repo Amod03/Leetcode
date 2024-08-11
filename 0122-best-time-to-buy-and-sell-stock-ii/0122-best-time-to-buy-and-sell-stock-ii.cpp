@@ -13,15 +13,18 @@ public:
         return dp[n][buy]=profit;
     }
     int maxProfit(vector<int>& prices) {
-        int curbuy,curnotbuy,prevbuy,prevnotbuy;
-        curbuy=curnotbuy=0;
+        vector<int>next(2,0),cur(2,0);
         int profit=0;
         for(int i=prices.size()-1;i>=0;i--){
-                 prevnotbuy=max(curbuy-prices[i],curnotbuy);
-                 prevbuy=max(curnotbuy+prices[i],curbuy);
-            curnotbuy=prevnotbuy;
-            curbuy=prevbuy;
+            for(int j=0;j<2;j++){
+                if(j)
+                 profit=max(next[0]-prices[i],next[1]);
+                 else
+                 profit=max(next[1]+prices[i],next[0]);
+                 cur[j]=profit;
+            }
+            next=cur;
         }
-        return curnotbuy;
+        return next[1];
     }
 };
