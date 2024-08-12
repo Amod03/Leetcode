@@ -22,12 +22,13 @@ public:
                last_index=i;
            }
        }
-       vector<int>order;
+ vector<int>order;
        order.push_back(a[last_index]);
        while(hash[last_index]!=last_index){
            last_index=hash[last_index];
            order.push_back(a[last_index]);
        }
-       return order;
+       reverse(order.begin(),order.end());
+        return order;
     }
 };
