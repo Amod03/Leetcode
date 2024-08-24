@@ -16,9 +16,29 @@ public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         int iniColor=image[sr][sc];
         vector<vector<int>>ans=image;
-        int delRow[]={-1,0,+1,0};
-        int delCol[]={0,+1,0,-1};
-        dfs(sr,sc,ans,image,newColor,delRow,delCol,iniColor);
+        // int delRow[]={-1,0,+1,0};
+        // int delCol[]={0,+1,0,-1};
+        // dfs(sr,sc,ans,image,newColor,delRow,delCol,iniColor);
+        // return ans;
+        // if(image.empty()) return 0;
+        int n = image.size(), m = image[0].size(), days = 0, tot = 0, cnt = 0;
+        queue<pair<int, int>> rotten;
+        rotten.push({sr,sc});
+        int dx[4] = {0, 0, 1, -1};
+        int dy[4] = {1, -1, 0, 0};
+        ans[sr][sc] = newColor;
+        while(!rotten.empty()){
+                int x = rotten.front().first, y = rotten.front().second;
+                rotten.pop();
+                for(int i = 0; i < 4; ++i){
+                    int nrow = x + dx[i], ncol = y + dy[i];
+                    if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && image[nrow][ncol]==iniColor && ans[nrow][ncol]!=newColor){
+                    ans[nrow][ncol] = newColor;
+                    rotten.push({nrow, ncol});
+                    }
+            }
+        }
+        
         return ans;
     }
 };
