@@ -5,8 +5,10 @@ public:
         int pivot=0;
         for(int i=n-2;i>=0;i--)
         {
-            if(nums[i]>nums[i+1])
+            if(nums[i]>nums[i+1]){
                 pivot=i+1;
+                break;
+            }
         }
         for(int i=0;i<n-1;i++)
         {
