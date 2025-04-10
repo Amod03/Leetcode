@@ -11,6 +11,7 @@ public:
             if((nums[low]==nums[mid]) && (nums[mid]==nums[high])){
                 low++;
                 high--;
+                continue;
             }
             
             else if(nums[mid]>=nums[low]){
