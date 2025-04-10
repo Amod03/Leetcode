@@ -1,43 +1,24 @@
 class Solution {
 public:
 
-    int getpivot(vector<int>&arr,int n)
-    {
- int low = 0, high = arr.size() - 1;
-    int ans = INT_MAX;
-    while (low <= high) {
-        int mid = (low + high) / 2;
-        //search space is already sorted
-        //then arr[low] will always be
-        //the minimum in that search space:
-        if (arr[low] <= arr[high]) {
-            ans = min(ans, arr[low]);
+    int findMin(vector<int>& nums) {
+      int low=0;
+      int high=nums.size()-1;
+      int ans=INT_MAX;
+      while(low<=high){
+        int mid=(low+high)/2;
+        if(nums[low]<nums[high]){
+            ans=min(nums[low],ans);
             break;
         }
-
-        //if left part is sorted:
-        if (arr[low] <= arr[mid]) {
-            // keep the minimum:
-            ans = min(ans, arr[low]);
-
-            // Eliminate left half:
-            low = mid + 1;
-        }
-        else { //if right part is sorted:
-
-            // keep the minimum:
-            ans = min(ans, arr[mid]);
-
-            // Eliminate right half:
-            high = mid - 1;
-        }
-    }
-    return ans;
-    }
-
-
-    int findMin(vector<int>& nums) {
-      int k=getpivot(nums,nums.size());
-      return k;
+        if(nums[low]<=nums[mid]){
+            ans=min(nums[low],ans);
+            low=mid+1;
+        }else{
+            ans=min(nums[mid],ans);
+            high=mid-1;
+        }  
+      }
+      return ans;
     }
 };
