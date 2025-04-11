@@ -5,10 +5,12 @@ public:
             return x;
         int first = 1, last = x;
         while (first <= last) {
-            long long mid = first + (last - first) / 2;
-            if (mid* mid  == x )
+            //use long long here and then u can use mid * mid
+            int mid = first + (last - first) / 2;
+            // mid * mid == x gives runtime error
+            if (mid  == x / mid)
                 return mid;
-            else if (mid* mid > x ) {
+            else if (mid > x / mid) {
                 last = mid - 1;
             }
             else {
