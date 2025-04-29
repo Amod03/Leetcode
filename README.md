@@ -65,6 +65,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0002-add-two-numbers](https://github.com/Amod03/Leetcode/tree/master/0002-add-two-numbers) |
+| [0237-delete-node-in-a-linked-list](https://github.com/Amod03/Leetcode/tree/master/0237-delete-node-in-a-linked-list) |
 ## Math
 |  |
 | ------- |
