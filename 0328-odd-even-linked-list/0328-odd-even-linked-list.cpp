@@ -15,16 +15,15 @@ public:
             return head;
         ListNode* first=head;
         ListNode* second=head->next;
-        ListNode* te=first;
-        ListNode* te2=second;
-        while(first->next && second->next)
+        ListNode* sh2=second;
+        while(second && second->next)
         {
-            first->next=second->next;
+            first->next=first->next->next;
             second->next=second->next->next;
             first=first->next;
             second=second->next;
         }
-      first->next=te2;
-        return te;
+      first->next=sh2;
+        return head;
     }
 };
