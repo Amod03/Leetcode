@@ -12,7 +12,6 @@ class Solution {
     private:
     void insertAtTail(ListNode* &head,ListNode* &tail,int val)
     {
-        ListNode* abc=NULL;
         ListNode* temp=new ListNode(val);
         if(head==NULL)
         {
