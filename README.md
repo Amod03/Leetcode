@@ -266,6 +266,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## String
 |  |
 | ------- |
+| [0008-string-to-integer-atoi](https://github.com/Amod03/Leetcode/tree/master/0008-string-to-integer-atoi) |
 | [0076-minimum-window-substring](https://github.com/Amod03/Leetcode/tree/master/0076-minimum-window-substring) |
 | [0424-longest-repeating-character-replacement](https://github.com/Amod03/Leetcode/tree/master/0424-longest-repeating-character-replacement) |
 | [1460-number-of-substrings-containing-all-three-characters](https://github.com/Amod03/Leetcode/tree/master/1460-number-of-substrings-containing-all-three-characters) |
