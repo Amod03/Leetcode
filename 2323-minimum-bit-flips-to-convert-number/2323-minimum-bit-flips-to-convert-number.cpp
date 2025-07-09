@@ -4,7 +4,7 @@ public:
         int count = 0, n = start ^ goal;
         while(n){
             n &= (n - 1);
-            ++count;
+            count++;
         }
         return count;
     }
